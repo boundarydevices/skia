@@ -171,6 +171,8 @@ void SkBitmap::updatePixelsFromRef() const {
                 p = (char*)p
                     + fPixelRefOrigin.fY * fRowBytes
                     + fPixelRefOrigin.fX * fInfo.bytesPerPixel();
+            } else {
+                return;
             }
             fPixels = p;
             fColorTable = fPixelRef->colorTable();

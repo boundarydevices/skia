@@ -69,6 +69,7 @@ void MAKENAME(_nofilter_DX)(const SkBitmapProcState& s,
     SkASSERT(count > 0 && colors != nullptr);
     SkASSERT(s.fInvType <= (SkMatrix::kTranslate_Mask | SkMatrix::kScale_Mask));
     SkASSERT(kNone_SkFilterQuality == s.fFilterLevel);
+    SkASSERT(s.fBitmap->getPixels());
     SkDEBUGCODE(CHECKSTATE(s);)
 
 #ifdef PREAMBLE
@@ -76,6 +77,8 @@ void MAKENAME(_nofilter_DX)(const SkBitmapProcState& s,
 #endif
     const SRCTYPE* SK_RESTRICT srcAddr = (const SRCTYPE*)s.fPixmap.addr();
 
+    if (srcAddr == NULL)
+        return;
     // buffer is y32, x16, x16, x16, x16, x16
     // bump srcAddr to the proper row, since we're told Y never changes
     SkASSERT((unsigned)xy[0] < (unsigned)s.fPixmap.height());
