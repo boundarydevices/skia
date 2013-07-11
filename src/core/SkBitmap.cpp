@@ -303,6 +303,8 @@ void SkBitmap::updatePixelsFromRef() const {
             void* p = fPixelRef->pixels();
             if (NULL != p) {
                 p = (char*)p + fPixelRefOffset;
+            } else {
+                return;
             }
             fPixels = p;
             SkRefCnt_SafeAssign(fColorTable, fPixelRef->colorTable());
