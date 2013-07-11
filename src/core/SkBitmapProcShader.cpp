@@ -193,6 +193,11 @@ void SkBitmapProcShader::BitmapProcShaderContext::shadeSpan(int x, int y, SkPMCo
     SkASSERT(state.fBitmap->getPixels());
     SkASSERT(state.fBitmap->pixelRef() == NULL ||
              state.fBitmap->pixelRef()->isLocked());
+    SkASSERT(state.fMatrixProc);
+    SkASSERT(state.fSampleProc32);
+
+    if (!mproc || !sproc || !state.fBitmap->getPixels())
+        return;
 
     for (;;) {
         int n = count;
